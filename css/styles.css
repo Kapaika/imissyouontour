@@ -42,7 +42,7 @@ body {
     position: relative;
 }
 
-/* Content container positioned slightly left of center */
+/* Content container positioned for optimal viewing */
 .content-container {
     position: absolute;
     top: 0;
@@ -50,106 +50,164 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-    transform: translate(-5%, 5%); /* Back to original: shift slightly left from center and down */
+    justify-content: flex-start; /* Align to the left */
+    align-items: center; 
+    transform: translateY(10%); /* Only move down to avoid logo, no horizontal shift */
+    padding-top: 0; /* Reset padding */
+    padding-left: 40px; /* Add padding from left edge */
 }
 
 .content-box {
-    padding: 30px;
+    padding: 10px 5px; /* Further reduced padding */
     border-radius: 10px;
-    max-width: 75%;
-    max-height: 80vh;
-    overflow-y: auto;
+    max-width: 350px; /* Much narrower for smaller buttons */
+    width: 80%;
+    max-height: 100vh; /* Allow full height */
+    overflow-y: visible; /* Changed to visible to prevent scroll */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    margin: 0 auto; /* Center in available space */
+    margin: 0; /* Remove auto margins that center the box */
+    margin-left: 0; /* Explicitly align to the left */
     color: white;
 }
 
 /* Styling for content */
 
+/* Original 3-column layout (commented out)
 .tour-columns {
     display: flex;
     justify-content: space-between;
-    gap: 15px; /* Reduced gap between columns */
+    gap: 15px;
     max-width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 .tour-column {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reduced gap between tour dates */
-    min-width: 0; /* Allow columns to shrink below content size */
-    padding-top: 5px; /* Add padding to prevent clipping of first item on hover */
+    gap: 15px;
+    min-width: 0;
+    padding-top: 5px;
 }
 
-/* Make the middle column significantly wider */
 .tour-column:nth-child(1) {
     flex: 1;
 }
 .tour-column:nth-child(2) {
-    flex: 1.1; /* Make the middle column 50% wider than the first */
+    flex: 1.1;
 }
 .tour-column:nth-child(3) {
     flex: 1.1;
 }
+*/
+
+/* New single column layout */
+.tour-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Further reduced space between concert items */
+    max-width: 320px; /* Even narrower width */
+    margin: 0 auto; /* Center the list */
+    width: 100%; /* Take up available width */
+    overflow-y: auto; /* Enable scrolling if needed */
+    max-height: 100vh; /* Full viewport height to ensure they all fit */
+}
 
 .tour-date {
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 10px; /* Further reduced padding */
+    border-radius: 5px; /* Smaller radius */
+    border: 1px solid rgba(0, 0, 0, 1); /* Thin border */
+    background-color: transparent; /* Transparent background */
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: visible; /* Changed from hidden to visible to ensure borders are always showing */
-    margin-top: 5px; /* Add margin to prevent clipping when element moves up */
+    overflow: visible;
+    margin-top: 1px; /* Minimal margin */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Smaller shadow */
 }
 
-.tour-date:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    /* Ensure border is fully visible during animation */
+.ticket-icon {
+    position: absolute;
+    right: 6px; /* Even closer to edge */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px; /* Even smaller size */
+    height: 14px; /* Even smaller size */
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket-icon::before {
+    content: '🎟️';
+    font-size: 12px; /* Even smaller icon */
+    line-height: 1;
+}
+
+/* Style for past events */
+.tour-date.past-event {
+    opacity: 0.5; /* Make it more faded */
+    filter: blur(0.4px); /* Slight blur effect */
+    cursor: default; /* Remove pointer cursor */
+    pointer-events: none; /* Make it unclickable */
+    border: 2px solid rgba(0, 0, 0, 0.4); /* Dimmer border */
+}
+
+.tour-date.past-event .ticket-icon {
+    opacity: 0.3;
+}
+
+.tour-date:hover:not(.past-event) {
+    transform: translateY(-3px);
+    border-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.05); /* Very subtle background on hover */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
-.tour-date:active {
-    transform: translateY(-2px);
+.tour-date:hover:not(.past-event) .ticket-icon {
+    opacity: 1;
+}
+
+.tour-date:active:not(.past-event) {
+    transform: translateY(-1px);
 }
 
 .date-city-container {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduced gap between date and city */
+    gap: 4px; /* Further reduced gap between date and city */
     justify-content: flex-start;
 }
 
 .date {
-    font-size: 1.1rem; /* Made font slightly smaller */
+    font-size: 0.75rem; /* Further reduced font size */
     font-weight: 600; /* Semibold */
-    color: #ffffff;
+    color: #000000; /* Pure black text */
     white-space: nowrap;
     font-family: 'Apotek ExtraWide', Arial, sans-serif;
 }
 
 .city {
-    font-size: 1.1rem; /* Made font slightly smaller */
+    font-size: 0.75rem; /* Further reduced font size */
     font-weight: 600; /* Semibold */
-    color: #ffffff;
+    color: #000000; /* Pure black text */
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.3px; /* Further reduced letter spacing */
     white-space: nowrap;
     font-family: 'Apotek ExtraWide', Arial, sans-serif;
 }
 
 .venue {
-    font-size: 0.85rem; /* Made font slightly smaller */
-    color: #cccccc;
-    margin-top: 6px;
+    font-size: 0.65rem; /* Further reduced font size */
+    color: #000000; /* Black text for consistency */
+    margin-top: 2px; /* Less space */
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px; /* Further reduced letter spacing */
     font-family: 'Apotek ExtraWide', Arial, sans-serif;
     font-weight: 600; /* Semibold */
 }
@@ -166,10 +224,10 @@ body {
         background-color: #000; /* Fallback in case the image doesn't load */
     }
     
-    .tour-date:hover {
+    .tour-date:hover:not(.past-event) {
         /* Minimal hover effect on mobile */
         transform: translateY(-1px);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         z-index: 1; /* Ensure border is visible on mobile too */
     }
     
@@ -180,54 +238,53 @@ body {
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
         transform: none; /* Reset the translate effect on mobile */
+        justify-content: flex-start; /* Left-align on mobile */
+        padding-left: 20px; /* Add left padding for mobile */
     }
     
     .content-box {
-        max-width: 98%;
-        width: 98%; /* Set explicit width */
-        margin: 0 auto;
-        padding: 5px;
+        max-width: 50%;
+        width: 50%; /* Much narrower width */
+        margin: 0; /* Left-align on mobile */
+        padding: 3px;
         overflow-x: hidden;
     }
     
-    .tour-columns {
-        flex-direction: row; /* Keep horizontal layout */
-        gap: 3px; /* Even smaller gap between columns */
-    }
-    
-    .tour-column {
-        width: auto;
-        gap: 3px; /* Even smaller gap between tour dates */
-    }
-    
-    .tour-column:nth-child(1) {
-        flex: 1;
-    }
-    .tour-column:nth-child(2) {
-        flex: 1.1; /* Make the middle column wider on mobile too */
-    }
-    .tour-column:nth-child(3) {
-        flex: 1.1;
+    /* Updated for single column layout */
+    .tour-list {
+        gap: 4px; /* Smaller gap between items on mobile */
+        max-height: 70vh; /* Slightly reduced height */
+        max-width: 160px; /* Much narrower buttons on mobile */
     }
     
     .tour-date {
-        padding: 4px 5px; /* Even smaller padding */
-        border-width: 1px; /* Thinner border */
+        padding: 2px 3px; /* Minimal padding */
+        border-width: 1px; /* Thin border */
+    }
+    
+    .ticket-icon {
+        right: 2px; /* Move even closer to edge */
+        width: 10px; /* Much smaller icon */
+        height: 10px;
+    }
+    
+    .ticket-icon::before {
+        font-size: 8px; /* Much smaller icon text */
     }
     
     .date-city-container {
-        gap: 4px;
+        gap: 2px;
         flex-direction: row; /* Keep date and city on the same line */
         align-items: center;
     }
     
     .date {
-        font-size: 0.7rem;
+        font-size: 0.55rem; /* Smaller font */
         line-height: 1;
     }
     
     .city {
-        font-size: 0.7rem;
+        font-size: 0.55rem; /* Smaller font */
         line-height: 1;
         flex-shrink: 1;
         overflow: hidden;
@@ -235,8 +292,8 @@ body {
     }
     
     .venue {
-        font-size: 0.7rem;
-        margin-top: 2px;
+        font-size: 0.5rem; /* Smaller font */
+        margin-top: 1px;
         line-height: 1;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -251,23 +308,32 @@ body {
         padding-top: 43%; /* Adjusted to be slightly lower */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
+        padding-left: 15px; /* Smaller left padding for very small devices */
     }
     
     .content-box {
-        padding: 4px;
-        width: 98%;
+        padding: 2px;
+        width: 40%; /* Much narrower */
+        max-width: 40%;
+        margin: 0; /* Ensure left alignment */
     }
     
-    .tour-columns {
-        gap: 2px;
-    }
-    
-    .tour-column {
-        gap: 2px;
+    .tour-list {
+        max-width: 130px; /* Much narrower buttons for small devices */
     }
     
     .tour-date {
-        padding: 3px 4px;
+        padding: 2px 3px; /* Minimal padding */
+    }
+    
+    .ticket-icon {
+        right: 4px;
+        width: 14px;
+        height: 14px;
+    }
+    
+    .ticket-icon::before {
+        font-size: 12px;
     }
     
     .date-city-container {
@@ -294,20 +360,31 @@ body {
         padding-top: 48%; /* Adjusted to be slightly lower */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
+        padding-left: 10px; /* Minimal left padding for tiny devices */
     }
     
-    .tour-columns {
-        /* Keep the three columns, but make them smaller */
-        gap: 1px;
+    .content-box {
+        width: 35%; /* Even narrower for tiny screens */
+        max-width: 35%;
     }
     
-    .tour-column {
-        gap: 1px;
+    .tour-list {
+        max-width: 110px; /* Super narrow buttons for tiny devices */
     }
     
     .tour-date {
-        padding: 2px 3px;
+        padding: 1px 2px; /* Minimal padding */
         border-width: 1px;
+    }
+    
+    .ticket-icon {
+        right: 3px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .ticket-icon::before {
+        font-size: 10px;
     }
     
     .date-city-container {

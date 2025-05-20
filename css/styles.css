@@ -52,7 +52,7 @@ body {
     display: flex;
     justify-content: flex-start; /* Align to the left */
     align-items: center; 
-    transform: translateY(10%); /* Only move down to avoid logo, no horizontal shift */
+    transform: translateY(2%); /* Only move down to avoid logo, no horizontal shift */
     padding-top: 0; /* Reset padding */
     padding-left: 40px; /* Add padding from left edge */
 }
@@ -60,7 +60,7 @@ body {
 .content-box {
     padding: 10px 5px; /* Further reduced padding */
     border-radius: 10px;
-    max-width: 350px; /* Much narrower for smaller buttons */
+    max-width: 300px; /* Narrower to match the narrower buttons */
     width: 80%;
     max-height: 100vh; /* Allow full height */
     overflow-y: visible; /* Changed to visible to prevent scroll */
@@ -106,7 +106,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px; /* Further reduced space between concert items */
-    max-width: 320px; /* Even narrower width */
+    max-width: 280px; /* Narrower width for the list */
     margin: 0 auto; /* Center the list */
     width: 100%; /* Take up available width */
     overflow-y: auto; /* Enable scrolling if needed */
@@ -114,7 +114,7 @@ body {
 }
 
 .tour-date {
-    padding: 6px 10px; /* Further reduced padding */
+    padding: 6px 8px; /* Reduced horizontal padding for narrower buttons */
     border-radius: 5px; /* Smaller radius */
     border: 1px solid rgba(0, 0, 0, 1); /* Thin border */
     background-color: transparent; /* Transparent background */
@@ -126,6 +126,7 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Smaller shadow */
+    max-width: 100%; /* Ensure buttons don't exceed container width */
 }
 
 .ticket-icon {
@@ -185,7 +186,7 @@ body {
 }
 
 .date {
-    font-size: 0.75rem; /* Further reduced font size */
+    font-size: 0.9rem; /* Increased font size for desktop */
     font-weight: 600; /* Semibold */
     color: #000000; /* Pure black text */
     white-space: nowrap;
@@ -193,7 +194,7 @@ body {
 }
 
 .city {
-    font-size: 0.75rem; /* Further reduced font size */
+    font-size: 0.9rem; /* Increased font size for desktop */
     font-weight: 600; /* Semibold */
     color: #000000; /* Pure black text */
     text-transform: uppercase;
@@ -203,8 +204,8 @@ body {
 }
 
 .venue {
-    font-size: 0.65rem; /* Further reduced font size */
-    color: #000000; /* Black text for consistency */
+    font-size: 0.65rem; /* Smaller font size */
+    color: #112b4c; /* Dark blue-gray that complements blue background */
     margin-top: 2px; /* Less space */
     text-transform: uppercase;
     letter-spacing: 0.2px; /* Further reduced letter spacing */
@@ -279,12 +280,12 @@ body {
     }
     
     .date {
-        font-size: 0.55rem; /* Smaller font */
+        font-size: 0.55rem; /* Smaller font for mobile */
         line-height: 1;
     }
     
     .city {
-        font-size: 0.55rem; /* Smaller font */
+        font-size: 0.55rem; /* Smaller font for mobile */
         line-height: 1;
         flex-shrink: 1;
         overflow: hidden;
@@ -292,7 +293,7 @@ body {
     }
     
     .venue {
-        font-size: 0.5rem; /* Smaller font */
+        font-size: 0.5rem; /* Smaller font for mobile */
         margin-top: 1px;
         line-height: 1;
         overflow: hidden;

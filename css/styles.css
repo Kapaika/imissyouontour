@@ -1,4 +1,8 @@
 /* Reset some default browser styles */
+:root {
+    --vh: 1vh; /* Will be set by JavaScript for better iOS support */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +15,8 @@ html, body {
     overflow: hidden;
     overscroll-behavior: none; /* Prevent bounce/overscroll effects */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    /* Ensure content extends into safe areas on iOS */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 body {
@@ -20,6 +26,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: Arial, sans-serif;
+    /* Ensure background extends to top of screen on iOS */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    position: relative;
 }
 
 /* Content container positioned slightly left of center */
@@ -136,6 +146,12 @@ body {
         background-image: url('../images/background-mobile.png');
     }
     
+    html {
+        /* Fill the iOS status bar with background */
+        padding-top: env(safe-area-inset-top);
+        background-color: #000; /* Fallback in case the image doesn't load */
+    }
+    
     .tour-date:hover {
         /* Minimal hover effect on mobile */
         transform: translateY(-1px);
@@ -146,7 +162,7 @@ body {
     /* Adjust content position for mobile to avoid the face in right bottom */
     .content-container {
         align-items: flex-start;
-        padding-top: 45%; /* Moved slightly higher */
+        padding-top: calc(45% + env(safe-area-inset-top)); /* Account for safe area */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
         transform: none; /* Reset the translate effect on mobile */

@@ -1,0 +1,299 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overscroll-behavior: none; /* Prevent bounce/overscroll effects */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+body {
+    background-image: url('../images/background-desktop.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+}
+
+/* Content container positioned slightly left of center */
+.content-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    transform: translate(-5%, 5%); /* Shift slightly left from center and down */
+}
+
+.content-box {
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 75%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin: 0 auto; /* Center in available space */
+    color: white;
+}
+
+/* Styling for content */
+
+.tour-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Reduced gap between columns */
+    max-width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.tour-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduced gap between tour dates */
+    min-width: 0; /* Allow columns to shrink below content size */
+    padding-top: 5px; /* Add padding to prevent clipping of first item on hover */
+}
+
+/* Make the middle column significantly wider */
+.tour-column:nth-child(1) {
+    flex: 1;
+}
+.tour-column:nth-child(2) {
+    flex: 1.1; /* Make the middle column 50% wider than the first */
+}
+.tour-column:nth-child(3) {
+    flex: 1.1;
+}
+
+.tour-date {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: visible; /* Changed from hidden to visible to ensure borders are always showing */
+    margin-top: 5px; /* Add margin to prevent clipping when element moves up */
+}
+
+.tour-date:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Ensure border is fully visible during animation */
+    z-index: 1;
+}
+
+.tour-date:active {
+    transform: translateY(-2px);
+}
+
+.date-city-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Reduced gap between date and city */
+    justify-content: flex-start;
+}
+
+.date {
+    font-size: 1.1rem; /* Made font slightly smaller */
+    font-weight: bold;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.city {
+    font-size: 1.1rem; /* Made font slightly smaller */
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.venue {
+    font-size: 0.85rem; /* Made font slightly smaller */
+    color: #cccccc;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        background-image: url('../images/background-mobile.png');
+    }
+    
+    .tour-date:hover {
+        /* Minimal hover effect on mobile */
+        transform: translateY(-1px);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        z-index: 1; /* Ensure border is visible on mobile too */
+    }
+    
+    /* Adjust content position for mobile to avoid the face in right bottom */
+    .content-container {
+        align-items: flex-start;
+        padding-top: 45%; /* Moved slightly higher */
+        max-width: 100vw;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        transform: none; /* Reset the translate effect on mobile */
+    }
+    
+    .content-box {
+        max-width: 98%;
+        width: 98%; /* Set explicit width */
+        margin: 0 auto;
+        padding: 5px;
+        overflow-x: hidden;
+    }
+    
+    .tour-columns {
+        flex-direction: row; /* Keep horizontal layout */
+        gap: 3px; /* Even smaller gap between columns */
+    }
+    
+    .tour-column {
+        width: auto;
+        gap: 3px; /* Even smaller gap between tour dates */
+    }
+    
+    .tour-column:nth-child(1) {
+        flex: 1;
+    }
+    .tour-column:nth-child(2) {
+        flex: 1.1; /* Make the middle column wider on mobile too */
+    }
+    .tour-column:nth-child(3) {
+        flex: 1.1;
+    }
+    
+    .tour-date {
+        padding: 4px 5px; /* Even smaller padding */
+        border-width: 1px; /* Thinner border */
+    }
+    
+    .date-city-container {
+        gap: 4px;
+        flex-direction: row; /* Keep date and city on the same line */
+        align-items: center;
+    }
+    
+    .date {
+        font-size: 0.7rem;
+        line-height: 1;
+    }
+    
+    .city {
+        font-size: 0.7rem;
+        line-height: 1;
+        flex-shrink: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .venue {
+        font-size: 0.7rem;
+        margin-top: 2px;
+        line-height: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 50%; /* Moved slightly higher */
+        max-width: 100vw;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+    
+    .content-box {
+        padding: 4px;
+        width: 98%;
+    }
+    
+    .tour-columns {
+        gap: 2px;
+    }
+    
+    .tour-column {
+        gap: 2px;
+    }
+    
+    .tour-date {
+        padding: 3px 4px;
+    }
+    
+    .date-city-container {
+        gap: 3px;
+    }
+    
+    .date {
+        font-size: 0.7rem;
+    }
+    
+    .city {
+        font-size: 0.7rem;
+    }
+    
+    .venue {
+        font-size: 0.6rem;
+        margin-top: 1px;
+    }
+}
+
+/* Very small devices or landscape orientation */
+@media (max-width: 360px) {
+    .content-container {
+        padding-top: 55%; /* Moved slightly higher */
+        max-width: 100vw;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+    
+    .tour-columns {
+        /* Keep the three columns, but make them smaller */
+        gap: 1px;
+    }
+    
+    .tour-column {
+        gap: 1px;
+    }
+    
+    .tour-date {
+        padding: 2px 3px;
+        border-width: 1px;
+    }
+    
+    .date-city-container {
+        gap: 2px;
+    }
+    
+    .date {
+        font-size: 0.6rem;
+    }
+    
+    .city {
+        font-size: 0.6rem;
+    }
+    
+    .venue {
+        font-size: 0.55rem;
+        margin-top: 1px;
+    }
+}

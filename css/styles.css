@@ -1,3 +1,12 @@
+/* Font face declaration for Apotek ExtraWide */
+@font-face {
+    font-family: 'Apotek ExtraWide';
+    src: url('../fonts/fonnts.com-Apotek_Wide_Semibold.otf') format('opentype');
+    font-weight: 600; /* semibold */
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Reset some default browser styles */
 :root {
     --vh: 1vh; /* Will be set by JavaScript for better iOS support */
@@ -25,7 +34,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: Arial, sans-serif;
+    font-family: 'Apotek ExtraWide', Arial, sans-serif;
+    font-weight: 600; /* Semibold */
     /* Ensure background extends to top of screen on iOS */
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -42,14 +52,14 @@ body {
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;
-    transform: translate(-5%, 5%); /* Shift slightly left from center and down */
+    transform: translate(-5%, 5%); /* Back to original: shift slightly left from center and down */
 }
 
 .content-box {
     padding: 30px;
     border-radius: 10px;
     max-width: 75%;
-    max-height: 90vh;
+    max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden; /* Prevent horizontal scrolling */
     margin: 0 auto; /* Center in available space */
@@ -118,18 +128,20 @@ body {
 
 .date {
     font-size: 1.1rem; /* Made font slightly smaller */
-    font-weight: bold;
+    font-weight: 600; /* Semibold */
     color: #ffffff;
     white-space: nowrap;
+    font-family: 'Apotek ExtraWide', Arial, sans-serif;
 }
 
 .city {
     font-size: 1.1rem; /* Made font slightly smaller */
-    font-weight: bold;
+    font-weight: 600; /* Semibold */
     color: #ffffff;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     white-space: nowrap;
+    font-family: 'Apotek ExtraWide', Arial, sans-serif;
 }
 
 .venue {
@@ -138,6 +150,8 @@ body {
     margin-top: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-family: 'Apotek ExtraWide', Arial, sans-serif;
+    font-weight: 600; /* Semibold */
 }
 
 /* Responsive design */
@@ -162,7 +176,7 @@ body {
     /* Adjust content position for mobile to avoid the face in right bottom */
     .content-container {
         align-items: flex-start;
-        padding-top: calc(45% + env(safe-area-inset-top)); /* Account for safe area */
+        padding-top: calc(38% + env(safe-area-inset-top)); /* Adjusted to be slightly lower */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
         transform: none; /* Reset the translate effect on mobile */
@@ -234,7 +248,7 @@ body {
 /* Extra small devices */
 @media (max-width: 480px) {
     .content-container {
-        padding-top: 50%; /* Moved slightly higher */
+        padding-top: 43%; /* Adjusted to be slightly lower */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
     }
@@ -277,7 +291,7 @@ body {
 /* Very small devices or landscape orientation */
 @media (max-width: 360px) {
     .content-container {
-        padding-top: 55%; /* Moved slightly higher */
+        padding-top: 48%; /* Adjusted to be slightly lower */
         max-width: 100vw;
         overflow-x: hidden; /* Prevent horizontal scrolling */
     }

@@ -22,7 +22,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add ticket icons to all tour dates
     addTicketIcons();
+    
+    // Ensure proper scroll behavior
+    enableSmoothScrolling();
 });
+
+// Function to enable smooth scrolling and prevent nested scroll issues
+function enableSmoothScrolling() {
+    // Add smooth scrolling to the body
+    document.body.style.scrollBehavior = 'smooth';
+    
+    // Prevent any non-body elements from capturing scroll
+    document.querySelectorAll('.tour-list, .content-box, .content-container').forEach(el => {
+        el.addEventListener('wheel', (e) => {
+            if (el.scrollHeight <= el.clientHeight) {
+                e.preventDefault();
+            }
+        });
+    });
+    
+    // For iOS touch events, ensure main scrolling works properly
+    document.addEventListener('touchmove', function(e) {
+        // If we're on a scrollable element that's reached its scroll limit, allow body to scroll
+        const target = e.target.closest('.tour-list, .content-box, .content-container');
+        if (target && (target.scrollHeight <= target.clientHeight)) {
+            e.stopPropagation();
+        }
+    }, { passive: false });
+}
 
 // Function to check if concert dates have passed
 function checkPastConcerts() {

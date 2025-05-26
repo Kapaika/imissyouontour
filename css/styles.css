@@ -245,6 +245,21 @@ body {
     cursor: default;
 }
 
+/* Sold-out button style */
+.buy-ticket-btn.sold-out {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+    border-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+.buy-ticket-btn.sold-out:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     body {
@@ -280,6 +295,9 @@ body {
     
     /* Updated for single column layout */
     .tour-list {
+        display: flex; /* Reset to flex for mobile */
+        flex-direction: column;
+        grid-template-columns: unset; /* Remove grid columns for mobile */
         gap: 4px;
         max-height: none; /* Remove height restriction */
         max-width: 100%;
@@ -293,6 +311,7 @@ body {
         justify-content: flex-start; /* Make sure elements are packed to the start */
         gap: 4px; /* Smaller gap on mobile */
         width: 100%;
+        margin-bottom: 0; /* Reset desktop margin */
     }
     
     .tour-info {
@@ -411,5 +430,67 @@ body {
     .buy-ticket-btn {
         padding: 3px 4px;
         font-size: 0.5rem;
+    }
+}
+
+/* Desktop Two-Column Layout Styles (desktop only) */
+@media (min-width: 769px) {
+    .content-container {
+        padding-top: 15vh;
+        padding-left: 60px;
+    }
+    
+    .content-box {
+        max-width: 700px; /* Much wider to accommodate two columns */
+        width: 90%;
+    }
+    
+    .tour-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
+        gap: 15px; /* Bigger gap between items */
+        max-width: 100%;
+    }
+    
+    .tour-date {
+        padding: 10px 12px; /* Increased padding for bigger touch targets */
+        gap: 15px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .tour-info {
+        min-width: 150px;
+        max-width: 200px; /* Wider info area */
+    }
+    
+    .date-city-container {
+        gap: 8px; /* Larger gap between date and city */
+    }
+    
+    .date {
+        font-size: 1.2rem; /* Bigger font size for desktop */
+    }
+    
+    .city {
+        font-size: 1.2rem; /* Bigger font size for desktop */
+    }
+    
+    .venue {
+        font-size: 0.85rem; /* Bigger venue text */
+        margin-top: 4px;
+    }
+    
+    /* Button container for right-aligned layout */
+    .button-container {
+        flex: 0 0 110px; /* Wider fixed width for desktop */
+        width: 110px;
+    }
+    
+    /* Buy ticket button */
+    .buy-ticket-btn {
+        padding: 8px 12px; /* Larger padding */
+        font-size: 0.9rem; /* Bigger font size */
+        border-width: 2px; /* Thicker border */
     }
 }

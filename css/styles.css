@@ -202,9 +202,17 @@ body {
 .button-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex: 0 0 85px; /* Increased fixed width */
-    width: 85px; /* Increased explicit width */
+    justify-content: flex-end; /* Always align buttons to the right */
+    flex: 0 0 85px; /* Fixed width */
+    width: 85px; /* Explicit width */
+    margin-left: auto; /* Push to the right */
+}
+
+/* Ensure the buttons inside links have the same size */
+.ticket-link {
+    width: 100%;
+    display: block;
+    text-decoration: none;
 }
 
 /* Buy ticket button */
@@ -245,19 +253,39 @@ body {
     cursor: default;
 }
 
-/* Sold-out button style */
+/* Sold-out button style - make it look like past events */
 .buy-ticket-btn.sold-out {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.5);
-    cursor: default;
-    border-color: rgba(0, 0, 0, 0.3);
+    opacity: 0.5;
+    filter: blur(0.4px);
     pointer-events: none;
+    cursor: default;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 1);
+    color: #000000;
+    /* Match regular button styles */
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    padding: 6px 10px;
+    width: 100%;
+    text-align: center;
 }
 
-.buy-ticket-btn.sold-out:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+/* Remove all hover effects for sold-out button */
+.buy-ticket-btn.sold-out:hover, 
+.buy-ticket-btn.sold-out:active,
+.tour-date:hover .buy-ticket-btn.sold-out {
+    background-color: transparent;
     transform: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 769px) {
+    .buy-ticket-btn.sold-out {
+        font-size: 0.9rem; /* Match desktop button font size */
+        padding: 8px 12px; /* Match desktop button padding */
+    }
 }
 
 /* Responsive design */
@@ -293,16 +321,14 @@ body {
         overflow: visible; /* Prevent scrolling context */
     }
     
-    /* Updated for single column layout */
+    /* Reset to single column for mobile */
     .tour-list {
-        display: flex; /* Reset to flex for mobile */
+        display: flex; /* Override grid for mobile */
         flex-direction: column;
-        grid-template-columns: unset; /* Remove grid columns for mobile */
-        gap: 4px;
-        max-height: none; /* Remove height restriction */
+        grid-template-columns: unset; /* Remove grid columns */
+        gap: 4px; /* Smaller gap on mobile */
         max-width: 100%;
         width: 100%;
-        overflow: visible; /* Prevent scrolling context */
     }
     
     .tour-date {
@@ -321,17 +347,44 @@ body {
     }
     
     .button-container {
-        flex: 0 0 75px; /* Larger but still smaller than desktop */
-        width: 75px;
+        flex: 0 0 70px; /* Standardized width */
+        width: 70px;
+        min-width: 70px; /* Ensure minimum width */
     }
     
-    .buy-ticket-btn {
+    .buy-ticket-btn, 
+    .buy-ticket-btn.sold-out {
         width: 100%;
-        margin-top: 0;
-        padding: 4px 6px; /* Slightly larger padding */
-        font-size: 0.6rem; /* Larger font size */
+        margin: 0;
+        padding: 4px 6px; /* Standardized padding */
+        font-size: 0.6rem; /* Standardized font size */
         border-width: 1px;
+        height: 26px; /* Fixed height for all buttons */
+        line-height: 1; /* Improved text alignment */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+    
+    /* Ensure sold-out button matches past events on mobile too */
+    .buy-ticket-btn.sold-out {
+        opacity: 0.5;
+        filter: blur(0.4px);
+        pointer-events: none;
+        font-size: 0.6rem; /* Match mobile font size */
+        padding: 4px 6px; /* Match mobile padding */
+        height: 26px; /* Match mobile height */
+        background-color: transparent;
+    }
+    
+    /* Ensure buttons inside links have the same dimensions */
+    .ticket-link {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Other mobile styles remain unchanged */
 }
 
 @media (max-width: 480px) {
@@ -365,14 +418,16 @@ body {
     }
     
     .button-container {
-        flex: 0 0 70px;
+        flex: 0 0 70px; /* Keep consistent with larger mobile view */
         width: 70px;
     }
     
-    .buy-ticket-btn {
-        padding: 3px 5px;
-        font-size: 0.55rem;
-        border-width: 1px;
+    /* Keep button size consistent */
+    .buy-ticket-btn,
+    .buy-ticket-btn.sold-out {
+        padding: 4px 6px;
+        font-size: 0.6rem;
+        height: 26px;
     }
 }
 
@@ -423,74 +478,71 @@ body {
     }
     
     .button-container {
-        flex: 0 0 65px;
-        width: 65px;
+        flex: 0 0 70px; /* Keep consistent across all mobile sizes */
+        width: 70px;
     }
     
-    .buy-ticket-btn {
-        padding: 3px 4px;
-        font-size: 0.5rem;
+    /* Keep button size consistent */
+    .buy-ticket-btn,
+    .buy-ticket-btn.sold-out {
+        padding: 4px 6px;
+        font-size: 0.6rem;
+        height: 26px;
     }
 }
 
 /* Desktop Two-Column Layout Styles (desktop only) */
 @media (min-width: 769px) {
     .content-container {
-        padding-top: 15vh;
+        padding-top: 22vh; /* Increased from 15vh to move content down further and avoid covering the logo */
         padding-left: 60px;
     }
     
     .content-box {
-        max-width: 700px; /* Much wider to accommodate two columns */
-        width: 90%;
+        max-width: 650px; /* Wider to accommodate two columns and prevent cutting off */
+        width: 650px;
     }
     
     .tour-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
-        gap: 15px; /* Bigger gap between items */
-        max-width: 100%;
+        gap: 15px 25px; /* Row gap 15px, column gap 25px for more spacing between columns */
+        max-width: 100%; /* Full width of content box */
     }
     
     .tour-date {
-        padding: 10px 12px; /* Increased padding for bigger touch targets */
-        gap: 15px;
-        border-radius: 5px;
-        margin-bottom: 5px;
+        padding: 8px 10px; /* Larger padding for desktop */
+        gap: 15px; /* Larger gap between info and button */
     }
     
     .tour-info {
-        min-width: 150px;
-        max-width: 200px; /* Wider info area */
-    }
-    
-    .date-city-container {
-        gap: 8px; /* Larger gap between date and city */
+        min-width: 150px; /* Wider on desktop */
+        max-width: 180px; /* Larger max width on desktop */
     }
     
     .date {
-        font-size: 1.2rem; /* Bigger font size for desktop */
+        font-size: 1.2rem; /* Larger font on desktop */
     }
     
     .city {
-        font-size: 1.2rem; /* Bigger font size for desktop */
+        font-size: 1.2rem; /* Larger font on desktop */
     }
     
     .venue {
-        font-size: 0.85rem; /* Bigger venue text */
-        margin-top: 4px;
+        font-size: 0.8rem; /* Larger font on desktop */
+        margin-top: 5px; /* More space between city and venue */
     }
     
-    /* Button container for right-aligned layout */
     .button-container {
-        flex: 0 0 110px; /* Wider fixed width for desktop */
+        flex: 0 0 110px; /* Increased fixed width to prevent cutting off */
         width: 110px;
+        display: flex;
+        justify-content: flex-end; /* Align button to the right */
+        margin-left: auto; /* Push to the right */
     }
     
-    /* Buy ticket button */
     .buy-ticket-btn {
-        padding: 8px 12px; /* Larger padding */
-        font-size: 0.9rem; /* Bigger font size */
-        border-width: 2px; /* Thicker border */
+        padding: 8px 12px; /* Larger padding for desktop */
+        font-size: 0.9rem; /* Larger font for desktop */
     }
 }

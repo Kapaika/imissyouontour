@@ -56,9 +56,13 @@ function checkPastConcerts() {
     // Get all tour dates
     const tourDates = document.querySelectorAll('.tour-date');
     
-    // Current date - using the provided date (May 20, 2025)
+    // Current date - using the actual current date
     const currentDate = new Date();
     const currentYear = 2025; // Hard-coded for this specific project
+    
+    // Get today's date at the beginning of day (00:00:00)
+    const todayStart = new Date(currentDate);
+    todayStart.setHours(0, 0, 0, 0);
     
     // Process each tour date
     tourDates.forEach(tourDate => {
@@ -71,9 +75,11 @@ function checkPastConcerts() {
             // Create a Date object for the concert date
             // Note: Months in JS are 0-based (0 = January)
             const concertDate = new Date(currentYear, month - 1, day);
+            concertDate.setHours(0, 0, 0, 0); // Start of the concert day
             
-            // If the concert date is before or equal to today, mark as past event
-            if (concertDate < currentDate) {
+            // Compare with today's start - if concert date is before today, it's past
+            // If it's today or future, keep it active
+            if (concertDate < todayStart) {
                 tourDate.classList.add('past-event');
             } else {
                 // Make sure we don't have a past-event class on future concerts
@@ -81,7 +87,7 @@ function checkPastConcerts() {
             }
             
             // For debugging
-            console.log(`Concert: ${dateText}, ${concertDate < currentDate ? 'Past' : 'Upcoming'}`);
+            console.log(`Concert: ${dateText}, Date: ${concertDate.toLocaleDateString()}, Today: ${todayStart.toLocaleDateString()}, Status: ${concertDate < todayStart ? 'Past' : 'Active'}`);
         }
     });
 }
